@@ -5,11 +5,11 @@ if (!file_exists($dataFile)) {
     file_put_contents($dataFile, json_encode([]));
 }
 
+$data = json_decode(file_get_contents($dataFile), true);
+
 if (isset($_GET['server'])) {
     $server = $_GET['server'];
     $timestamp = time();
-
-    $data = json_decode(file_get_contents($dataFile), true);
 
     if (!isset($data[$server])) {
         $data[$server] = [];
@@ -25,5 +25,5 @@ if (isset($_GET['server'])) {
 }
 
 header('Content-Type: application/json');
-echo file_get_contents($dataFile);
+echo json_encode($data);
 ?>
