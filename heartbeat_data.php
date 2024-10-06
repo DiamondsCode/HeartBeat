@@ -17,8 +17,8 @@ if (isset($_GET['server'])) {
 
     $data[$server][] = ['time' => $timestamp];
 
-    if (count($data[$server]) > 20) {
-        array_shift($data[$server]);
+    if (count($data[$server]) > 5) {
+        $data[$server] = array_slice($data[$server], -5);
     }
 
     file_put_contents($dataFile, json_encode($data));
